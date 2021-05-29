@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div><sapn id="order">1</sapn>번째 참가자</div>
+    <div>제시어 : <sapn id="word"></sapn></div>
+    <input type="text">
+    <button>입력</button>
+
+    <script>
+        
+        const number = Number(prompt('몇명이 참가하나요?'));
+        // number가 null이 되면  Nan이 되고 Nan은 false가 된다.
+        if (number) {
+
+            const buttons = document.querySelector('button');
+            const inputs = document.querySelector('input');
+            const words = document.querySelector('#word');
+            const orders = document.querySelector('#order');
+
+            let word; // 제시어
+            let newWord; // 입력된 단어
+
+            const onClickButton = () => {
+                if (!word || (word[word.length - 1] === newWord[0] && newWord.length === 3)) {
+                    // 제시어가 아니거나 제시어의 마지막 글자가 입력된 값의 첫번째 글짜랑 같고 이가 3이면 true
+
+                    word = newWord;
+                    words.textContent = word;
+                    const order = Number(orders.textContent); // 현재순서
+                    if (order + 1 > number) {
+                        orders.textContent = 1;
+                        } else {
+                            orders.textContent = order + 1;
+                        }
+                } else {
+                    alert('올바르지 않은 단어입니다');
+                }
+                inputs.value = '';
+                inputs.focus();
+
+            };
+
+            const onInput = () => {
+                newWord = event.target.value;
+            };
+            
+            buttons.addEventListener('click',onClickButton);
+            inputs.addEventListener('input',onInput);
+            
+
+        }
+
+    </script>
+
+</body>
+
+</html>
